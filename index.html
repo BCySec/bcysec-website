@@ -368,6 +368,12 @@
   .form-status.success{color:var(--success);}
   .form-status.error{color:var(--danger);}
 
+  .track-section{padding:72px 0 88px;}
+  .track-tease{text-align:center;max-width:520px;margin:0 auto;}
+  .track-tease .section-title{margin-left:auto;margin-right:auto;}
+  .track-tease .section-lead{margin:0 auto;font-size:16px;}
+  .track-tease .eyebrow{margin-bottom:10px;}
+
   /* footer */
   .footer{padding:56px 0 34px;border-top:1px solid var(--border-soft);}
   .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
@@ -408,6 +414,66 @@
     transition:opacity .3s var(--ease),transform .3s var(--ease);
   }
   .toast.show{opacity:1;transform:translate(-50%,0);}
+
+  /* ============ CTF easter egg ============ */
+  .status-pill{cursor:pointer;}
+  .status-pill:hover{border-color:rgba(124,150,255,.4);color:var(--text-dim);}
+  .ctf-cloak{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  }
+  .ctf-overlay{
+    position:fixed;inset:0;z-index:9600;background:rgba(3,5,10,.78);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    display:none;align-items:center;justify-content:center;padding:24px;
+  }
+  .ctf-overlay.open{display:flex;}
+  .ctf-panel{
+    width:min(560px,100%);max-height:min(88vh,720px);overflow:auto;
+    background:#070b14;border:1px solid var(--border);border-radius:16px;
+    box-shadow:0 28px 80px -24px rgba(0,0,0,.75),0 0 0 1px rgba(76,130,255,.12) inset;
+    display:flex;flex-direction:column;
+  }
+  .ctf-head{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:16px 18px;border-bottom:1px solid var(--border-soft);
+  }
+  .ctf-title{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:16px;}
+  .ctf-title span{color:var(--accent-cyan);}
+  .ctf-close{
+    width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--surface);
+    color:var(--text);cursor:pointer;font-size:18px;line-height:1;
+  }
+  .ctf-close:hover{border-color:rgba(255,255,255,.28);}
+  .ctf-body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:14px;}
+  .ctf-dots{display:flex;gap:6px;flex-wrap:wrap;}
+  .ctf-dot{
+    width:18px;height:8px;border-radius:99px;background:rgba(255,255,255,.08);
+    border:1px solid var(--border-soft);
+  }
+  .ctf-dot.done{background:var(--success);border-color:rgba(46,207,130,.5);}
+  .ctf-dot.now{background:var(--accent);border-color:rgba(76,130,255,.6);}
+  .ctf-meta{font-size:12px;color:var(--text-faint);}
+  .ctf-level{font-size:13px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;}
+  .ctf-h{font-family:"Space Grotesk",sans-serif;font-size:22px;margin:0;}
+  .ctf-hint{font-size:14.5px;color:var(--text-dim);line-height:1.6;}
+  .ctf-hint code,.ctf-win code{
+    font-family:"JetBrains Mono",monospace;font-size:12.5px;
+    background:rgba(255,255,255,.05);padding:2px 6px;border-radius:5px;color:var(--accent-cyan);
+  }
+  .ctf-form{display:flex;gap:8px;flex-wrap:wrap;}
+  .ctf-form input{
+    flex:1 1 180px;background:rgba(255,255,255,.03);border:1px solid var(--border);
+    border-radius:9px;padding:12px 12px;color:var(--text);font-family:"JetBrains Mono",monospace;font-size:13px;
+  }
+  .ctf-form input:focus{border-color:var(--accent);outline:none;}
+  .ctf-msg{min-height:20px;font-size:13px;font-weight:600;}
+  .ctf-msg.ok{color:var(--success);}
+  .ctf-msg.bad{color:var(--danger);}
+  .ctf-win{display:none;padding:8px 0 4px;}
+  .ctf-win.show{display:block;}
+  .ctf-win p{color:var(--text-dim);font-size:14.5px;line-height:1.6;margin:0 0 10px;}
+  body.ctf-lock{overflow:hidden;}
 </style>
 </head>
 <body>
@@ -443,6 +509,7 @@
   </div>
 </header>
 
+<!-- FLAG: BCYSEC{view_source_01}  — if you can read this, start at #egg -->
 <main id="main">
 
   <section id="home" class="hero">
@@ -578,6 +645,14 @@
     </div>
   </section>
 
+  <section id="advanced-track" class="section track-section alt" aria-label="Advanced track">
+    <div class="container track-tease reveal">
+      <p class="eyebrow">Advanced track</p>
+      <h2 class="section-title">Want to join the Advanced Track?</h2>
+      <p class="section-lead">Why don’t you look around?</p>
+    </div>
+  </section>
+
 </main>
 
 <footer class="footer">
@@ -600,14 +675,14 @@
         <a href="https://instagram.com/bocconicybersecurity" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>
         </a>
-        <a href="mailto:hello@bcysec.it" aria-label="Email" id="footerEmail">
+        <a href="mailto:hello@bcysec.it" aria-label="Email" id="footerEmail" data-secret="BCYSEC{inspect_me}">
           <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.7"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
-      <div class="status-pill"><span class="dot"></span> All systems operational</div>
+      <div class="status-pill" id="statusPill" title="All systems operational?" role="button" tabindex="0"><span class="dot"></span> All systems operational</div>
     </div>
   </div>
-  <p class="footer-copy">© <span id="year"></span> Bocconi Students Cyber Security Association</p>
+  <p class="footer-copy">© <span id="year"></span> Bocconi Students Cyber Security Association<span class="ctf-cloak" id="ctfCloak" aria-hidden="true">BCYSEC{css_cloak}</span></p>
 </footer>
 
 <button class="to-top" id="toTop" aria-label="Back to top" data-scroll-target="#home">
@@ -615,6 +690,36 @@
 </button>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="ctf-overlay" id="ctfOverlay" role="dialog" aria-modal="true" aria-labelledby="ctfTitle">
+  <div class="ctf-panel">
+    <div class="ctf-head">
+      <div class="ctf-title" id="ctfTitle">BCySec <span>// training ground</span></div>
+      <button class="ctf-close" id="ctfClose" type="button" aria-label="Close">&times;</button>
+    </div>
+    <div class="ctf-body">
+      <div class="ctf-dots" id="ctfDots" aria-hidden="true"></div>
+      <p class="ctf-meta mono" id="ctfMeta">0 / 10</p>
+      <div id="ctfPlay">
+        <p class="ctf-level mono" id="ctfLevel">Level 01</p>
+        <h3 class="ctf-h" id="ctfName">Source</h3>
+        <p class="ctf-hint" id="ctfHint"></p>
+        <form class="ctf-form" id="ctfForm">
+          <input id="ctfInput" type="text" autocomplete="off" spellcheck="false" placeholder="BCYSEC{...}" aria-label="Flag">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+        <p class="ctf-msg" id="ctfMsg" role="status"></p>
+      </div>
+      <div class="ctf-win" id="ctfWin">
+        <h3 class="ctf-h">Egg cracked.</h3>
+        <p>Ten tiny web puzzles, all in the browser. You earned a seat in the Advanced Track.</p>
+        <p>Join the WhatsApp group and tell us you finished the training ground.</p>
+        <p>Last flag: <code>BCYSEC{egg_cracked}</code></p>
+        <a class="btn btn-primary" id="ctfJoin" href="https://chat.whatsapp.com/Gy5FVEVyiZvEEKkRNziUdD" target="_blank" rel="noopener noreferrer">Join the Advanced Track</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -710,7 +815,13 @@
     navToggle.setAttribute("aria-expanded", open ? "true" : "false");
   });
   document.addEventListener("keydown", function(e){
-    if(e.key === "Escape") closeMobileMenu();
+    if(e.key === "Escape"){
+      if(typeof closeCtf === "function" && document.body.classList.contains("ctf-lock")){
+        closeCtf();
+        return;
+      }
+      closeMobileMenu();
+    }
   });
 
   /* ============ Hero: word reveal ============ */
@@ -862,17 +973,164 @@
     toastTimer = setTimeout(function(){ toast.classList.remove("show"); }, 2600);
   }
 
-  /* ============ Easter eggs ============ */
+  /* ============ Easter eggs + tiny JS CTF ============ */
   console.log("%cBCySec", "font-size:20px;font-weight:700;color:#4c82ff;");
-  console.log("%cCurious enough to open devtools? You might like building things with us.\\nJoin: scroll to 'Get Involved' or say hi at " + CONTACT_EMAIL, "color:#9aa3ba;font-family:monospace;");
+  console.log("%cCurious enough to open devtools? Type egg — or visit #egg.\\nJoin: scroll to Get Involved or say hi at " + CONTACT_EMAIL, "color:#9aa3ba;font-family:monospace;");
 
-  var seq = [], target = ["b","c","s"];
+  var LEVELS = [
+    {name:"Source", hint:"The first flag is an HTML comment sitting just above <code>&lt;main&gt;</code>. Right-click the page → View Source."},
+    {name:"Console", hint:"We talk to ourselves in the console. Open it (F12) and look for a <code>BCYSEC{...}</code> line."},
+    {name:"Cloak", hint:"Something in the footer copyright is there, but you cannot see it. Inspect that line."},
+    {name:"Inspect", hint:"The mail icon in the footer has extra attributes. One of them is not about email."},
+    {name:"Base64", hint:"Decode this in the console with <code>atob(...)</code>:<br><code>QkNZU0VDe2F0b2JfZnJpZW5kfQ==</code>"},
+    {name:"Hash", hint:"Change the URL hash to <code>#ghost</code> (keep this panel open) and watch."},
+    {name:"Storage", hint:"We left a breadcrumb. Open Application → Local Storage and find <code>bcysec-crumb</code>."},
+    {name:"Function", hint:"This page exported a tiny helper. In the console, run <code>bcysec.hint()</code>."},
+    {name:"Rotate", hint:"Each letter moved 13 places around the alphabet:<br><code>OPLFRP{e0g13_dhrfg}</code>"},
+    {name:"Final", hint:"One more function. Try <code>bcysec.final()</code>, then give it the passphrase it asks for."}
+  ];
+  var FLAG_B64 = [
+    "QkNZU0VDe3ZpZXdfc291cmNlXzAxfQ==",
+    "QkNZU0VDe2NvbnNvbGVfY293Ym95fQ==",
+    "QkNZU0VDe2Nzc19jbG9ha30=",
+    "QkNZU0VDe2luc3BlY3RfbWV9",
+    "QkNZU0VDe2F0b2JfZnJpZW5kfQ==",
+    "QkNZU0VDe2hhc2hfaHVudGVyfQ==",
+    "QkNZU0VDe3N0b3JhZ2Vfc25hY2t9",
+    "QkNZU0VDe2NhbGxfbWVfbWF5YmV9",
+    "QkNZU0VDe3IwdDEzX3F1ZXN0fQ==",
+    "QkNZU0VDe2VnZ19jcmFja2VkfQ=="
+  ];
+  var ctfOverlay = document.getElementById("ctfOverlay");
+  var ctfDots = document.getElementById("ctfDots");
+  var ctfMeta = document.getElementById("ctfMeta");
+  var ctfLevel = document.getElementById("ctfLevel");
+  var ctfName = document.getElementById("ctfName");
+  var ctfHint = document.getElementById("ctfHint");
+  var ctfInput = document.getElementById("ctfInput");
+  var ctfMsg = document.getElementById("ctfMsg");
+  var ctfPlay = document.getElementById("ctfPlay");
+  var ctfWin = document.getElementById("ctfWin");
+  var solved = [];
+  try { solved = JSON.parse(localStorage.getItem("bcysec-ctf") || "[]"); } catch(err){ solved = []; }
+  if(!Array.isArray(solved)) solved = [];
+
+  function flagOf(i){ return atob(FLAG_B64[i]); }
+  function currentLevel(){
+    for(var i=0;i<10;i++){ if(solved.indexOf(i) === -1) return i; }
+    return 10;
+  }
+  function persistSolved(){ localStorage.setItem("bcysec-ctf", JSON.stringify(solved)); }
+
+  function renderCtf(){
+    var n = currentLevel();
+    ctfDots.innerHTML = "";
+    for(var i=0;i<10;i++){
+      var d = document.createElement("span");
+      d.className = "ctf-dot" + (solved.indexOf(i) !== -1 ? " done" : (i === n ? " now" : ""));
+      ctfDots.appendChild(d);
+    }
+    ctfMeta.textContent = solved.length + " / 10";
+    if(n >= 10){
+      ctfPlay.style.display = "none";
+      ctfWin.classList.add("show");
+      return;
+    }
+    ctfPlay.style.display = "";
+    ctfWin.classList.remove("show");
+    ctfLevel.textContent = "Level " + String(n+1).padStart(2,"0");
+    ctfName.textContent = LEVELS[n].name;
+    ctfHint.innerHTML = LEVELS[n].hint;
+    ctfMsg.textContent = "";
+    ctfMsg.className = "ctf-msg";
+    ctfInput.value = "";
+    if(n === 1){
+      console.log("%cLevel 2 flag: " + flagOf(1), "color:#22d3ee;font-family:monospace;");
+    }
+    if(n === 6){
+      try { localStorage.setItem("bcysec-crumb", flagOf(6)); } catch(err){}
+    }
+  }
+
+  function openCtf(){
+    ctfOverlay.classList.add("open");
+    document.body.classList.add("ctf-lock");
+    renderCtf();
+    setTimeout(function(){ if(currentLevel() < 10) ctfInput.focus(); }, 40);
+  }
+  function closeCtf(){
+    ctfOverlay.classList.remove("open");
+    document.body.classList.remove("ctf-lock");
+  }
+  window.closeCtf = closeCtf;
+
+  document.getElementById("ctfClose").addEventListener("click", closeCtf);
+  ctfOverlay.addEventListener("click", function(e){ if(e.target === ctfOverlay) closeCtf(); });
+  document.getElementById("ctfJoin").addEventListener("click", function(){ closeCtf(); });
+
+  document.getElementById("ctfForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var n = currentLevel();
+    if(n >= 10) return;
+    var guess = (ctfInput.value || "").trim();
+    if(guess === flagOf(n)){
+      solved.push(n);
+      persistSolved();
+      ctfMsg.textContent = "Correct.";
+      ctfMsg.className = "ctf-msg ok";
+      setTimeout(renderCtf, 280);
+    } else {
+      ctfMsg.textContent = "Not that one.";
+      ctfMsg.className = "ctf-msg bad";
+    }
+  });
+
+  window.bcysec = {
+    hint: function(){ return flagOf(7); },
+    final: function(pass){
+      if(pass == null){
+        console.log("usage: bcysec.final(\"passphrase\") — hint: our acronym, lowercase");
+        return "missing passphrase";
+      }
+      if(String(pass).toLowerCase() === "bcysec") return flagOf(9);
+      return "nope";
+    }
+  };
+
+  function onHashEgg(){
+    var h = (location.hash || "").toLowerCase();
+    if(h === "#egg" || h === "#ctf") openCtf();
+    if(h === "#ghost" && ctfOverlay.classList.contains("open") && currentLevel() === 5){
+      ctfHint.innerHTML = LEVELS[5].hint + "<br><br>A ghost left this: <code>" + flagOf(5) + "</code>";
+    }
+  }
+  window.addEventListener("hashchange", onHashEgg);
+  if(location.hash) setTimeout(onHashEgg, 200);
+
+  var pillClicks = 0, pillTimer;
+  var statusPill = document.getElementById("statusPill");
+  function bumpPill(){
+    pillClicks++;
+    clearTimeout(pillTimer);
+    pillTimer = setTimeout(function(){ pillClicks = 0; }, 1400);
+    if(pillClicks >= 5){ pillClicks = 0; openCtf(); }
+  }
+  statusPill.addEventListener("click", bumpPill);
+  statusPill.addEventListener("keydown", function(e){
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); bumpPill(); }
+  });
+
+  var seq = [];
   document.addEventListener("keydown", function(e){
     if(document.activeElement && /input|textarea|select/i.test(document.activeElement.tagName)) return;
-    seq.push(e.key.toLowerCase());
-    seq = seq.slice(-3);
-    if(seq.join("") === target.join("")){
-      showToast("🛡 Access granted — welcome, defender.");
+    seq.push(e.key.length === 1 ? e.key.toLowerCase() : e.key);
+    seq = seq.slice(-8);
+    if(seq.slice(-3).join("") === "egg"){
+      openCtf();
+      seq = [];
+    }
+    if(seq.slice(-3).join("") === "bcs"){
+      showToast("🛡 Access granted — now try typing egg.");
       seq = [];
     }
   });
