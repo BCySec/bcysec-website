@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<article class="article">
+  <a class="article-back" href="{{ site.baseurl }}/blog.html">← Back to the blog</a>
+  <header class="article-header">
+    <p class="eyebrow">Blog</p>
+    <h1 class="article-title">{{ page.title }}</h1>
+    <p class="article-meta">{{ page.date | date: "%B %-d, %Y" }}{% if page.author %} · {{ page.author }}{% endif %}</p>
+  </header>
+  <div class="article-body">
+    {{ content }}
+  </div>
+</article>
