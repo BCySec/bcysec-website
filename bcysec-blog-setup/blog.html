@@ -1,0 +1,26 @@
+---
+layout: default
+title: Blog
+---
+<div class="container blog-hero">
+  <p class="eyebrow">Blog</p>
+  <h1 class="page-title">From the team.</h1>
+  <p class="page-lead">Articles, write-ups, and updates from BCySec.</p>
+</div>
+
+<div class="container">
+  {% if site.posts.size > 0 %}
+  <div class="blog-grid">
+    {% for post in site.posts %}
+    <a class="blog-card" href="{{ site.baseurl }}{{ post.url }}">
+      <span class="blog-card-date">{{ post.date | date: "%B %-d, %Y" }}</span>
+      <h2>{{ post.title }}</h2>
+      {% if post.excerpt %}<p>{{ post.excerpt }}</p>{% endif %}
+      <span class="blog-card-link">Read article →</span>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="blog-empty">No articles yet — check back soon.</p>
+  {% endif %}
+</div>
