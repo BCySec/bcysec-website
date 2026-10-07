@@ -174,6 +174,7 @@
     .nav-menu.open a[data-nav]:nth-child(3){transition-delay:.18s;}
     .nav-menu.open a[data-nav]:nth-child(4){transition-delay:.23s;}
     .nav-menu.open a[data-nav]:nth-child(5){transition-delay:.28s;}
+    .nav-menu.open a[data-nav]:nth-child(6){transition-delay:.33s;}
     .nav-cta{margin-left:0;margin-top:10px;text-align:center;}
   }
 
@@ -504,6 +505,7 @@
       <a data-nav href="#roadmap">Roadmap</a>
       <a data-nav href="#board">Board</a>
       <a data-nav href="#get-involved">Get Involved</a>
+      <a data-nav href="blog.html">Blog</a>
       <a href="#get-involved" class="btn btn-primary nav-cta" data-scroll>Join BCySec</a>
     </nav>
   </div>
@@ -669,6 +671,7 @@
       <a href="#roadmap" data-scroll>Roadmap</a>
       <a href="#board" data-scroll>Board</a>
       <a href="#get-involved" data-scroll>Get Involved</a>
+      <a href="blog.html">Blog</a>
     </nav>
     <div style="display:flex;align-items:center;gap:16px;">
       <div class="footer-social">
@@ -793,7 +796,8 @@
   }, {passive:true});
   onScroll();
 
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-menu a[data-nav]'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-menu a[data-nav]'))
+    .filter(function(a){ return a.getAttribute("href").charAt(0) === "#"; });
   var sections = navLinks.map(function(a){ return document.querySelector(a.getAttribute("href")); }).filter(Boolean);
   if("IntersectionObserver" in window){
     var navObserver = new IntersectionObserver(function(entries){
